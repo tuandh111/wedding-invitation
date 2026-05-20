@@ -266,7 +266,7 @@ window.addEventListener('scroll', () => {
    6. COUNTDOWN TIMER
    ✏️ Thay ngày cưới ở đây: 'YYYY-MM-DDTHH:MM:SS'
 ────────────────────────────────────── */
-const WEDDING_DATE = new Date('2026-05-24T18:00:00');
+const WEDDING_DATE = new Date('2026-05-24T08:00:00');
 
 function padTwo(n) { return String(n).padStart(2, '0'); }
 
