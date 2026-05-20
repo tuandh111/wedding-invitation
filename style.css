@@ -254,21 +254,27 @@ ul  { list-style: none; }
   position: relative;
   height: 100svh;
   min-height: 600px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
 }
 
+/* Background Parallax */
 .hero-parallax {
   position: absolute;
-  inset: -10% 0;
-  background:
-    url('images/z7839559878788_a4fc78c4706f1d5e2ff9f8e2c7b93e0c.jpg')
-    center/cover no-repeat;
+  inset: 0;
+
+  background-image: url('images/z7839559878788_a4fc78c4706f1d5e2ff9f8e2c7b93e0c.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  transform: scale(1.08); /* chống hở viền */
   will-change: transform;
 }
-
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -1073,85 +1079,202 @@ ul  { list-style: none; }
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 1024px) {
+
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 180px;
+    gap: 10px;
   }
+
   .gallery-item.large {
     grid-column: span 2;
     grid-row: span 2;
   }
+
 }
 
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
 
-  .hero-names { gap: 12px; }
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .hero-names {
+    gap: 12px;
+  }
 
   .story-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .story-img-frame { aspect-ratio: 3/2; max-width: 480px; margin: 0 auto; }
-  .story-img-deco  { display: none; }
 
-  /* ── Gallery responsive fix ── */
+  .story-img-frame {
+    aspect-ratio: 3 / 2;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .story-img-deco {
+    display: none;
+  }
+
+  /* ===== Gallery ===== */
+
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: auto;   /* bỏ chiều cao cố định */
+    grid-auto-rows: 160px;
     gap: 8px;
   }
-  .gallery-item {
-    aspect-ratio: 1 / 1;   /* ô vuông, ảnh không bao giờ bị mất */
-  }
-  .gallery-item.large {
-    grid-column: span 2;
-    grid-row: span 1;       /* không span row trên mobile */
-    aspect-ratio: 16 / 9;  /* ảnh lớn dạng ngang */
-  }
 
-  .timeline { padding: 0 16px; }
-  .tl-center-line { left: 24px; }
-  .tl-item        { padding: 0 0 0 60px !important; justify-content: flex-start !important; }
-  .tl-item::before { left: 24px; transform: none; }
-  .tl-card { max-width: 100%; }
-
-  .location-grid { grid-template-columns: 1fr; }
-
-  .invite-card { padding: 40px 28px; }
-
-  .countdown { padding: 12px 16px; gap: 2px; }
-  .cd-item   { min-width: 38px; }
-  .cd-dot    { margin: 0 2px; }
-}
-
-@media (max-width: 480px) {
-  .section-title { font-size: 1.8rem; }
-
-  /* ── Gallery mobile nhỏ ── */
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: auto;
-    gap: 6px;
-  }
   .gallery-item {
     aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 18px;
   }
+
   .gallery-item.large {
     grid-column: span 2;
     grid-row: span 1;
-    aspect-ratio: 4 / 3;   /* hơi vuông hơn cho màn hình nhỏ */
+    aspect-ratio: 16 / 9;
   }
 
-  .invite-card   { padding: 36px 20px; }
-  .invite-names  { font-size: 2rem; }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 
-  .hero-names    { flex-direction: column; gap: 0; }
-  .hero-ampersand { font-size: 2rem; }
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* ===== Timeline ===== */
+
+  .timeline {
+    padding: 0 16px;
+  }
+
+  .tl-center-line {
+    left: 24px;
+  }
+
+  .tl-item {
+    padding: 0 0 0 60px !important;
+    justify-content: flex-start !important;
+  }
+
+  .tl-item::before {
+    left: 24px;
+    transform: none;
+  }
+
+  .tl-card {
+    max-width: 100%;
+  }
+
+  /* ===== Other ===== */
+
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .invite-card {
+    padding: 40px 28px;
+  }
+
+  .countdown {
+    padding: 12px 16px;
+    gap: 2px;
+  }
+
+  .cd-item {
+    min-width: 38px;
+  }
+
+  .cd-dot {
+    margin: 0 2px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  /* ===== Gallery ===== */
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+    gap: 6px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1 / 1;
+  }
+
+  .gallery-item.large {
+    grid-column: span 2;
+    grid-row: span 1;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* ===== Invite ===== */
+
+  .invite-card {
+    padding: 36px 20px;
+  }
+
+  .invite-names {
+    font-size: 2rem;
+  }
+
+  /* ===== Hero ===== */
+
+  .hero-names {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hero-ampersand {
+    font-size: 2rem;
+  }
+
   .bride-name,
-  .groom-name    { font-size: 3.2rem; }
+  .groom-name {
+    font-size: 3.2rem;
+  }
 
-  .countdown { flex-wrap: wrap; justify-content: center; border-radius: 16px; }
+  /* ===== Countdown ===== */
+
+  .countdown {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
 }
